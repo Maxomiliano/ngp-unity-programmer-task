@@ -7,6 +7,6 @@ public class ItemDataSO : ScriptableObject
 {
     public GameObject itemPrefab;
     public string itemName;
-    public enum ItemType {Weapon, Armor, Tool, Material };
+    public enum ItemType {Weapon, Armor, Tool, Material }
     public Sprite itemIcon;
 }
