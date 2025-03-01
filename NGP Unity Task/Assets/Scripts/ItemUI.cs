@@ -67,7 +67,7 @@ public class ItemUI : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDragHa
 
     private IEnumerator DelayedHideTooltip()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForEndOfFrame();
         if (!_tooltipUI.IsCursorOverTooltip)
         {
             _tooltipUI.HideTooltip();

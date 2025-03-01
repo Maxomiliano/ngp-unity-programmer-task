@@ -41,6 +41,7 @@ public class ItemTooltipUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         _itemDescriptionText.text = item.itemDescription;
         _itemDamageText.text = item.damage.ToString();
         _itemResistanceText.text = item.resistance.ToString();
+        //transform.position = position + new Vector2(100, -150);
         transform.position = position;
         _canvasGroup.alpha = 1;
         _canvasGroup.blocksRaycasts = true;
