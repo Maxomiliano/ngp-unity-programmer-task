@@ -6,8 +6,19 @@ using UnityEngine;
 public class InventoryUI : MonoBehaviour
 {
     [SerializeField] private Inventory _inventory;
+    [SerializeField] private InventoryUI _inventoryUI;
     [SerializeField] private Transform _slotTransform;
     [SerializeField] private GameObject _slotPrefab;
+
+    private void OnEnable()
+    {
+        _inventory.OnInventoryUpdated += UpdateUI;
+    }
+
+    private void OnDisable()
+    {
+        _inventory.OnInventoryUpdated -= UpdateUI;
+    }
 
     public void UpdateUI()
     {
@@ -21,7 +32,7 @@ public class InventoryUI : MonoBehaviour
         {
             GameObject slotGO = Instantiate(_slotPrefab, _slotTransform);
             ItemUI slot = slotGO.GetComponent<ItemUI>();
-            slot.Initialize(items[i], i, _inventory);            
+            slot.Initialize(items[i], i, _inventoryUI);            
         }
     }
 

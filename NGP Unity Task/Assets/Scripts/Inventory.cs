@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -7,6 +8,7 @@ public class Inventory : MonoBehaviour
 {
     [SerializeField] private int _maxSlots = 10;
     private List<ItemDataSO> _items = new List<ItemDataSO>();
+    public event Action OnInventoryUpdated;
 
     public bool AddItem(ItemDataSO item)
     {
@@ -16,6 +18,7 @@ public class Inventory : MonoBehaviour
             return false;
         }
         _items.Add(item);
+        OnInventoryUpdated?.Invoke();
         return true;
     }
 
@@ -24,6 +27,7 @@ public class Inventory : MonoBehaviour
         if (_items.Contains(item))
         {
             _items.Remove(item);
+            OnInventoryUpdated?.Invoke();
         }
     }
 
