@@ -12,6 +12,7 @@ public class ItemTooltipUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _itemResistanceText;
     [SerializeField] private Button _equipButton;
     [SerializeField] private Button _dropButton;
+    [SerializeField] private CanvasGroup _canvasGroup;
 
     private ItemDataSO _currentItem;
     private Inventory _inventory;
@@ -24,22 +25,26 @@ public class ItemTooltipUI : MonoBehaviour
     private void Awake()
     {
         _inventory = FindObjectOfType<Inventory>();
-        gameObject.SetActive(false);
+        HideTooltip();
     }
 
     public void ShowTooltip(ItemDataSO item, Vector2 position)
     {
+        if (_canvasGroup.alpha == 1) return;
+
         _currentItem = item;
         _itemNameText.text = item.itemName;
         _itemDescriptionText.text = item.itemDescription;
         _itemDamageText.text = item.damage.ToString();
         _itemResistanceText.text = item.resistance.ToString();
         transform.position = position;
-        gameObject.SetActive(true);
+        _canvasGroup.alpha = 1;
+        _canvasGroup.blocksRaycasts = true;
     }
 
     public void HideTooltip()
     {
-        gameObject.SetActive(false);
+        _canvasGroup.alpha = 0;
+        _canvasGroup.blocksRaycasts = false;
     }
 }

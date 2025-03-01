@@ -1622,6 +1622,7 @@ GameObject:
   - component: {fileID: 5420983415755578910}
   - component: {fileID: 6025555356718617726}
   - component: {fileID: 4669989165616792678}
+  - component: {fileID: 9127237618986371987}
   m_Layer: 5
   m_Name: ItemTooltip
   m_TagString: Untagged
@@ -1705,6 +1706,19 @@ MonoBehaviour:
   _itemResistanceText: {fileID: 2780698895337884254}
   _equipButton: {fileID: 4474194069175092046}
   _dropButton: {fileID: 4969541874348225600}
+  _canvasGroup: {fileID: 9127237618986371987}
+--- !u!225 &9127237618986371987
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3011119740909812756}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &3369524792366452967
 GameObject:
   m_ObjectHideFlags: 0
