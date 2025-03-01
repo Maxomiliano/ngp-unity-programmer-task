@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using TMPro;
 
 public class ItemUI : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDragHandler, IDropHandler
-//IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private CanvasGroup _canvasGroup;
     [SerializeField] private Image _itemIcon;
+    [SerializeField] private TextMeshProUGUI _text;
     private ItemDataSO _itemData;
     private int _index;
     private InventoryUI _inventoryUI;
@@ -23,12 +24,14 @@ public class ItemUI : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDragHa
         _inventoryUI = inventoryUI;
         _itemIcon.sprite = item.itemIcon;
         _canvasGroup = GetComponent<CanvasGroup>();
+        _text.text = item.name;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
         _parentTransform = transform.parent;
-        transform.SetParent(transform.root);
+        //transform.SetParent(transform.root);
+
         _canvasGroup.blocksRaycasts = false;
     }
     public void OnDrag(PointerEventData eventData)
@@ -40,6 +43,7 @@ public class ItemUI : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDragHa
     {
         transform.SetParent(_parentTransform);
         _canvasGroup.blocksRaycasts = true;
+        LayoutRebuilder.ForceRebuildLayoutImmediate(transform.parent.GetComponent<RectTransform>());
     }
 
     public void OnDrop(PointerEventData eventData)

@@ -6,9 +6,24 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
+    public static Inventory Instance { get; private set; }
+
     [SerializeField] private int _maxSlots = 10;
     private List<ItemDataSO> _items = new List<ItemDataSO>();
     public event Action OnInventoryUpdated;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     public bool AddItem(ItemDataSO item)
     {
