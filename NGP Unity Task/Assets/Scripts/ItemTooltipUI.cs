@@ -17,18 +17,16 @@ public class ItemTooltipUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     private bool _isCursorOverTooltip = false;
 
     private ItemDataSO _currentItem;
-    private Inventory _inventory;
 
     public bool IsCursorOverTooltip { get => _isCursorOverTooltip; set => _isCursorOverTooltip = value; }
 
     private void Start()
     {
-        //Equip and drop button functionality
+        _equipButton.onClick.AddListener(()=>Inventory.Instance.EquipItem(_currentItem));
     }
 
     private void Awake()
     {
-        _inventory = FindObjectOfType<Inventory>();
         HideTooltip();
     }
 

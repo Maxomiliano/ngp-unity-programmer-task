@@ -6,7 +6,7 @@ public enum ItemType
 {
     Weapon,
     Armor,
-    Tool,
+    Consumable,
     Material,
     Trinket
 }

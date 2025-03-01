@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -9,7 +10,17 @@ public class Inventory : MonoBehaviour
     public static Inventory Instance { get; private set; }
 
     [SerializeField] private int _maxSlots = 10;
+
     private List<ItemDataSO> _items = new List<ItemDataSO>();
+    private Dictionary<ItemType, ItemDataSO> _equippedSlots = new Dictionary<ItemType, ItemDataSO>()
+    {
+        { ItemType.Weapon, null },
+        { ItemType.Armor, null },
+        { ItemType.Trinket, null}
+    };
+
+    public Dictionary<ItemType, ItemDataSO> EquippedSlots => _equippedSlots;
+
     public event Action OnInventoryUpdated;
 
     private void Awake()
@@ -22,7 +33,7 @@ public class Inventory : MonoBehaviour
         else
         {
             Destroy(gameObject);
-        }
+        }        
     }
 
     public bool AddItem(ItemDataSO item)
@@ -33,7 +44,7 @@ public class Inventory : MonoBehaviour
             Debug.Log("Inventory full");
             return false;
         }
-        _items.Add(item);
+        _items.Add(Instantiate(item));
         OnInventoryUpdated?.Invoke();
         return true;
     }
@@ -44,6 +55,7 @@ public class Inventory : MonoBehaviour
         {
             _items.Remove(item);
         }
+        OnInventoryUpdated?.Invoke();
     }
 
     public ItemDataSO GetItem(int index)
@@ -67,13 +79,29 @@ public class Inventory : MonoBehaviour
 
     public void EquipItem(ItemDataSO item)
     {
-        
+        if (_equippedSlots.ContainsKey(item.type))
+        {
+            if (_equippedSlots[item.type] != null)
+            {
+                var oldItem = _equippedSlots[item.type];
+                AddItem(oldItem);
+            }
+            _equippedSlots[item.type] = item;
+            RemoveItem(item);
+        }
+        OnInventoryUpdated?.Invoke();
     }
 
     public void UnequipItem(ItemDataSO item)
     {
-        
+        if (_equippedSlots.ContainsKey(item.type))
+        {
+            if (_equippedSlots[item.type] != null)
+            {
+                AddItem(item);
+                _equippedSlots[item.type] = null;
+            }
+        }
+        OnInventoryUpdated?.Invoke();
     }
-
-    //Metodo para checkear si hay slot vacio de la lista de ItemSlots
 }

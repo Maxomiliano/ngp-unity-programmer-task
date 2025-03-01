@@ -46,6 +46,7 @@ public class ItemUI : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDragHa
         LayoutRebuilder.ForceRebuildLayoutImmediate(transform.parent.GetComponent<RectTransform>());
     }
 
+    
     public void OnDrop(PointerEventData eventData)
     {
         ItemUI droppedItem = eventData.pointerDrag.GetComponent<ItemUI>();
@@ -54,6 +55,7 @@ public class ItemUI : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDragHa
             _inventoryUI.SwapItem(_index, droppedItem._index);
         }
     }
+    
 
     public void OnPointerEnter(PointerEventData eventData)
     {
