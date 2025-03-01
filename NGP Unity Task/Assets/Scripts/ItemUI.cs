@@ -62,6 +62,15 @@ public class ItemUI : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDragHa
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        _tooltipUI.HideTooltip();
+        StartCoroutine(DelayedHideTooltip());
+    }
+
+    private IEnumerator DelayedHideTooltip()
+    {
+        yield return new WaitForSeconds(0.1f);
+        if (!_tooltipUI.IsCursorOverTooltip)
+        {
+            _tooltipUI.HideTooltip();
+        }
     }
 }
