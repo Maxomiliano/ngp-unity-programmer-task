@@ -20,6 +20,7 @@ public class InventoryUI : MonoBehaviour
         _inventory.OnInventoryUpdated -= UpdateUI;
     }
 
+    [ContextMenu("UpdateUI")]
     public void UpdateUI()
     {
         foreach (Transform child in _slotTransform)
