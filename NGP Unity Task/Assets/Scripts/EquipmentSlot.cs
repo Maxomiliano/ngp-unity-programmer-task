@@ -7,7 +7,9 @@ using UnityEngine.EventSystems;
 public class EquipmentSlot : MonoBehaviour
 {
     [SerializeField] ItemType _itemType;
-    [SerializeField] GameObject _equippedObject;
+    [SerializeField] EquipmentSlotUI _equippedPrefab;
+
+    private EquipmentSlotUI _equippedSlotUI;
 
     public ItemType Type { get => _itemType; }
 
@@ -16,11 +18,16 @@ public class EquipmentSlot : MonoBehaviour
         if (item != null)
         {
             //Mostrar contenido del item
-            Instantiate(_equippedObject, transform);
+            _equippedSlotUI = Instantiate(_equippedPrefab, transform);
+            _equippedSlotUI.Initialize(item);
         }
         else
         {
-            //Vaciar contenido
+            if (_equippedSlotUI != null)
+            {
+                //Vaciar contenido
+                Destroy(_equippedSlotUI.gameObject);
+            }
         }
     }
 }
