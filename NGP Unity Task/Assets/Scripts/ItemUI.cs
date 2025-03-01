@@ -5,12 +5,13 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 
-public class ItemUI : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDragHandler, IDropHandler
+public class ItemUI : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDragHandler, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private CanvasGroup _canvasGroup;
     [SerializeField] private Image _itemIcon;
     [SerializeField] private TextMeshProUGUI _text;
     private ItemDataSO _itemData;
+    private ItemTooltipUI _tooltipUI;
     private int _index;
     private InventoryUI _inventoryUI;
     private Transform _parentTransform;
@@ -23,8 +24,9 @@ public class ItemUI : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDragHa
         _index = index;
         _inventoryUI = inventoryUI;
         _itemIcon.sprite = item.itemIcon;
-        _canvasGroup = GetComponent<CanvasGroup>();
         _text.text = item.name;
+        _canvasGroup = GetComponent<CanvasGroup>();
+        _tooltipUI = FindObjectOfType<ItemTooltipUI>();
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -51,5 +53,15 @@ public class ItemUI : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDragHa
         {
             _inventoryUI.SwapItem(_index, droppedItem._index);
         }
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        _tooltipUI.ShowTooltip(_itemData, transform.position);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        _tooltipUI.HideTooltip();
     }
 }
