@@ -30,8 +30,6 @@ public class ItemUI : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDragHa
     public void OnBeginDrag(PointerEventData eventData)
     {
         _parentTransform = transform.parent;
-        //transform.SetParent(transform.root);
-
         _canvasGroup.blocksRaycasts = false;
     }
     public void OnDrag(PointerEventData eventData)

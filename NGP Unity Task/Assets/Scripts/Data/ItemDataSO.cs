@@ -17,7 +17,11 @@ public class ItemDataSO : ScriptableObject
     public string itemName;
     public ItemType type;
     public Sprite itemIcon;
+    public string itemDescription;
+    public int damage;
+    public int resistance;
 
+    /*
     public void Use() 
     { 
         //Switch case en funcion del tipo de item
@@ -28,4 +32,5 @@ public class ItemDataSO : ScriptableObject
     {
         FindFirstObjectByType<Inventory>().AddItem(this);
     }
+    */
 }
