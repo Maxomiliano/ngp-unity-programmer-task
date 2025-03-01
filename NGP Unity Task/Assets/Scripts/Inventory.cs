@@ -10,9 +10,9 @@ public class Inventory : MonoBehaviour
     private List<ItemDataSO> _items = new List<ItemDataSO>();
     public event Action OnInventoryUpdated;
 
-    [ContextMenu("AddItem")]
     public bool AddItem(ItemDataSO item)
     {
+        Debug.Log("Objeto añadido al inventario");
         if (_items.Count >= _maxSlots)
         {
             Debug.Log("Inventory full");
@@ -28,7 +28,6 @@ public class Inventory : MonoBehaviour
         if (_items.Contains(item))
         {
             _items.Remove(item);
-            OnInventoryUpdated?.Invoke();
         }
     }
 
@@ -60,4 +59,6 @@ public class Inventory : MonoBehaviour
     {
         
     }
+
+    //Metodo para checkear si hay slot vacio de la lista de ItemSlots
 }

@@ -8,7 +8,7 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] private Inventory _inventory;
     [SerializeField] private InventoryUI _inventoryUI;
     [SerializeField] private Transform _slotTransform;
-    [SerializeField] private GameObject _slotPrefab;
+    [SerializeField] private ItemUI _slotPrefab;
 
     private void OnEnable()
     {
@@ -30,9 +30,8 @@ public class InventoryUI : MonoBehaviour
         List<ItemDataSO> items = _inventory.GetAllItems();
         for (int i = 0; i < items.Count; i++)
         {
-            GameObject slotGO = Instantiate(_slotPrefab, _slotTransform);
-            ItemUI slot = slotGO.GetComponent<ItemUI>();
-            slot.Initialize(items[i], i, _inventoryUI);            
+            ItemUI slotGO = Instantiate(_slotPrefab, _slotTransform);
+            slotGO.Initialize(items[i], i, _inventoryUI);            
         }
     }
 
