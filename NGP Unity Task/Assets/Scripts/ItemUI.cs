@@ -7,12 +7,12 @@ using UnityEngine.UI;
 public class ItemUI : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDragHandler, IDropHandler
 //IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
+    [SerializeField] private CanvasGroup _canvasGroup;
+    [SerializeField] private Image _itemIcon;
     private ItemDataSO _itemData;
     private int _index;
     private InventoryUI _inventoryUI;
     private Transform _parentTransform;
-    private CanvasGroup _canvasGroup;
-    public Image ItemIcon;
 
 
 
@@ -21,7 +21,7 @@ public class ItemUI : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDragHa
         _itemData = item;
         _index = index;
         _inventoryUI = inventoryUI;
-        ItemIcon.sprite = item.itemIcon;
+        _itemIcon.sprite = item.itemIcon;
         _canvasGroup = GetComponent<CanvasGroup>();
     }
 

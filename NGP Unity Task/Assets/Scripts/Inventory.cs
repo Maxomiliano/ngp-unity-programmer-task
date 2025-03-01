@@ -10,6 +10,7 @@ public class Inventory : MonoBehaviour
     private List<ItemDataSO> _items = new List<ItemDataSO>();
     public event Action OnInventoryUpdated;
 
+    [ContextMenu("AddItem")]
     public bool AddItem(ItemDataSO item)
     {
         if (_items.Count >= _maxSlots)
