@@ -7,7 +7,8 @@ public enum ItemType
     Weapon,
     Armor,
     Tool,
-    Material
+    Material,
+    Trinket
 }
 
 [CreateAssetMenu(fileName = "New Item", menuName = "Inventory/ItemData")]

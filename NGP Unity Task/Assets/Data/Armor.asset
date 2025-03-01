@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9615f5f209e674f4a8fc80386b699f32, type: 3}
   m_Name: Armor
   m_EditorClassIdentifier: 
-  itemName: Armor
-  type: 0
-  itemIcon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  itemName: Helmet
+  type: 1
+  itemIcon: {fileID: 21300000, guid: b91918a86c2ade84cb93a176674bf203, type: 3}
+  itemDescription: Well it's just a helmet.
+  damage: 0
+  resistance: 12
