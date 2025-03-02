@@ -1,10 +1,8 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class Inventory : MonoBehaviour
 {
@@ -140,7 +138,7 @@ public class Inventory : MonoBehaviour
             }
         }
 
-        string json = JsonUtility.ToJson(data);
+        string json = JsonUtility.ToJson(data, true);
         PlayerPrefs.SetString("InventoryData", json);
         PlayerPrefs.Save();
     }
@@ -172,19 +170,18 @@ public class Inventory : MonoBehaviour
                     }
                 }
             }
-            foreach (var kvp in data.equippedItems)
+            foreach (var equippedItem in data.equippedItems)
             {
-                Debug.Log($"Trying to equip {kvp.Value} to {kvp.Key}");
-                ItemDataSO item = ItemDatabase.Instance.GetItemByID(equippedItema.id);
+                Debug.Log($"Trying to equip {equippedItem.itemID} to {equippedItem.itemType}");
+                ItemDataSO item = ItemDatabase.Instance.GetItemByID(equippedItem.itemID);
                 if (item != null)
                 {
-                    //_equippedSlots.Add(kvp.Key, item);
-                    _equippedSlots[kvp.Key] = item;
-                    Debug.Log($"Successfully loaded {item.ID} into {kvp.Key}");
+                    _equippedSlots[equippedItem.itemType] = item;
+                    Debug.Log($"Successfully loaded {item.ID} into {equippedItem.itemType}");
                 }
                 else
                 {
-                    Debug.LogError($"Failed to load item with ID {kvp.Value}");
+                    Debug.LogError($"Failed to load item with ID {equippedItem.itemID}");
                 }
             }
             OnInventoryUpdated?.Invoke();
