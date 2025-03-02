@@ -18,3 +18,4 @@ MonoBehaviour:
   itemDescription: A ring.
   damage: 5
   resistance: 5
+  ID: ring_1

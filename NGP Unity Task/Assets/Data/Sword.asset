@@ -18,3 +18,4 @@ MonoBehaviour:
   itemDescription: Mighty sword
   damage: 15
   resistance: 0
+  ID: sword_1

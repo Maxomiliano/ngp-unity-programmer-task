@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class Inventory : MonoBehaviour
 {
@@ -36,7 +37,7 @@ public class Inventory : MonoBehaviour
         else
         {
             Destroy(gameObject);
-        }        
+        }
     }
 
     public bool AddItem(ItemDataSO item)
@@ -116,6 +117,76 @@ public class Inventory : MonoBehaviour
         {
             //Action
             RemoveItem(item);
+            OnInventoryUpdated?.Invoke();
+        }
+    }
+
+    public void SaveInventory()
+    {
+        InventoryData data = new InventoryData();
+        data.itemsIDs = _items.Select(i => i.ID).ToList();
+        foreach (var kvp in _equippedSlots)
+        {
+            if (kvp.Value != null)
+            {
+                //data.equippedItems[kvp.Key] = kvp.Value.ID;
+                EquippedItemData equippedData = new EquippedItemData
+                {
+                    itemType = kvp.Key,
+                    itemID = kvp.Value.ID
+                };
+                data.equippedItems.Add(equippedData);
+                Debug.Log($"Saving equipped item: {kvp.Key} -> {kvp.Value.ID}");
+            }
+        }
+
+        string json = JsonUtility.ToJson(data);
+        PlayerPrefs.SetString("InventoryData", json);
+        PlayerPrefs.Save();
+    }
+
+    public void LoadInventory()
+    {
+        if (PlayerPrefs.HasKey("InventoryData"))
+        {
+            string json = PlayerPrefs.GetString("InventoryData");
+            InventoryData data = JsonUtility.FromJson<InventoryData>(json);
+
+            Debug.Log("Loading Inventory: " + json);
+
+            _items.Clear();
+            _equippedSlots = new Dictionary<ItemType, ItemDataSO>()
+            {
+                { ItemType.Weapon, null },
+                { ItemType.Armor, null },
+                { ItemType.Trinket, null}
+            };
+
+            foreach (string itemID in data.itemsIDs)
+            {
+                ItemDataSO item = ItemDatabase.Instance.GetItemByID(itemID);
+                {
+                    if (item != null)
+                    {
+                        _items.Add(item);
+                    }
+                }
+            }
+            foreach (var kvp in data.equippedItems)
+            {
+                Debug.Log($"Trying to equip {kvp.Value} to {kvp.Key}");
+                ItemDataSO item = ItemDatabase.Instance.GetItemByID(equippedItema.id);
+                if (item != null)
+                {
+                    //_equippedSlots.Add(kvp.Key, item);
+                    _equippedSlots[kvp.Key] = item;
+                    Debug.Log($"Successfully loaded {item.ID} into {kvp.Key}");
+                }
+                else
+                {
+                    Debug.LogError($"Failed to load item with ID {kvp.Value}");
+                }
+            }
             OnInventoryUpdated?.Invoke();
         }
     }

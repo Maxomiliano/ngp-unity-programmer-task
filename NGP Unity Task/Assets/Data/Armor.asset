@@ -18,3 +18,4 @@ MonoBehaviour:
   itemDescription: Well it's just a helmet.
   damage: 0
   resistance: 12
+  ID: helmet_1

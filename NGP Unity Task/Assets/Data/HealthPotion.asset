@@ -18,3 +18,4 @@ MonoBehaviour:
   itemDescription: Restores 50 health
   damage: 0
   resistance: 0
+  ID: hpotion_1
