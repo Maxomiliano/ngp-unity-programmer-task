@@ -12,7 +12,8 @@ public class ItemTooltipUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     [SerializeField] private TextMeshProUGUI _itemDamageText;
     [SerializeField] private TextMeshProUGUI _itemResistanceText;
     [SerializeField] private Button _equipButton;
-    [SerializeField] private Button _dropButton;
+    [SerializeField] private Button _unequipButton;
+    //[SerializeField] private Button _deleteButton;
     [SerializeField] private CanvasGroup _canvasGroup;
     private bool _isCursorOverTooltip = false;
 
@@ -23,6 +24,7 @@ public class ItemTooltipUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     private void Start()
     {
         _equipButton.onClick.AddListener(()=>Inventory.Instance.EquipItem(_currentItem));
+        _unequipButton.onClick.AddListener(() => Inventory.Instance.UnequipItem(_currentItem));
     }
 
     private void Awake()
@@ -39,7 +41,6 @@ public class ItemTooltipUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         _itemDescriptionText.text = item.itemDescription;
         _itemDamageText.text = item.damage.ToString();
         _itemResistanceText.text = item.resistance.ToString();
-        //transform.position = position + new Vector2(100, -150);
         transform.position = position;
         _canvasGroup.alpha = 1;
         _canvasGroup.blocksRaycasts = true;

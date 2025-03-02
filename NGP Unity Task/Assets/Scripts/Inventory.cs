@@ -18,10 +18,13 @@ public class Inventory : MonoBehaviour
         { ItemType.Armor, null },
         { ItemType.Trinket, null}
     };
-
     public Dictionary<ItemType, ItemDataSO> EquippedSlots => _equippedSlots;
 
+    public bool IsItemEquipped { get => _isItemEquipped; set => _isItemEquipped = value; }
+
     public event Action OnInventoryUpdated;
+    private bool _isItemEquipped;
+
 
     private void Awake()
     {
@@ -89,6 +92,8 @@ public class Inventory : MonoBehaviour
             _equippedSlots[item.type] = item;
             RemoveItem(item);
         }
+        IsItemEquipped = false;
+        Debug.Log("OnInventoryUpdated INVOCADO desde EquipItem");
         OnInventoryUpdated?.Invoke();
     }
 
@@ -102,6 +107,8 @@ public class Inventory : MonoBehaviour
                 _equippedSlots[item.type] = null;
             }
         }
+        IsItemEquipped = false;
+        Debug.Log("OnInventoryUpdated INVOCADO desde UnequipItem");
         OnInventoryUpdated?.Invoke();
     }
 }

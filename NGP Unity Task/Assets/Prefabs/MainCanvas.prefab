@@ -1737,7 +1737,7 @@ MonoBehaviour:
   _itemDamageText: {fileID: 1417619440381558811}
   _itemResistanceText: {fileID: 2780698895337884254}
   _equipButton: {fileID: 4474194069175092046}
-  _dropButton: {fileID: 4969541874348225600}
+  _unequipButton: {fileID: 4969541874348225600}
   _canvasGroup: {fileID: 9127237618986371987}
 --- !u!225 &9127237618986371987
 CanvasGroup:
@@ -2520,7 +2520,7 @@ GameObject:
   - component: {fileID: 1012164638647428751}
   - component: {fileID: 4969541874348225600}
   m_Layer: 5
-  m_Name: DropButton
+  m_Name: UnequipButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
