@@ -17,8 +17,11 @@ public class EquipmentSlot : MonoBehaviour
     {
         if (item != null)
         {
-            //Mostrar contenido del item
-            _equippedSlotUI = Instantiate(_equippedPrefab, transform);
+            if (_equippedSlotUI == null)
+            {
+                //Mostrar contenido del item
+                _equippedSlotUI = Instantiate(_equippedPrefab, transform);
+            }
             _equippedSlotUI.Initialize(item);
         }
         else
@@ -27,6 +30,7 @@ public class EquipmentSlot : MonoBehaviour
             {
                 //Vaciar contenido
                 Destroy(_equippedSlotUI.gameObject);
+                _equippedSlotUI = null;
             }
         }
     }
