@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: HealthPotion
   type: 2
-  itemIcon: {fileID: 21300000, guid: 5db164026242e7940bcb0636403ef581, type: 3}
+  itemIcon: {fileID: 1537565426, guid: 3f1846aec5e50c74c87fcee67de94908, type: 3}
   itemDescription: Restores 50 health
   damage: 0
   resistance: 0

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Ring
   type: 4
-  itemIcon: {fileID: 21300000, guid: de19c24f967af464f92bac0534cefb37, type: 3}
+  itemIcon: {fileID: 569039860, guid: 3f1846aec5e50c74c87fcee67de94908, type: 3}
   itemDescription: A ring.
   damage: 5
   resistance: 5

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Sword
   type: 0
-  itemIcon: {fileID: 21300000, guid: 6d07c51ff354ba24d97cd26cafadb4e2, type: 3}
+  itemIcon: {fileID: -2012582187, guid: 3f1846aec5e50c74c87fcee67de94908, type: 3}
   itemDescription: Mighty sword
   damage: 15
   resistance: 0
