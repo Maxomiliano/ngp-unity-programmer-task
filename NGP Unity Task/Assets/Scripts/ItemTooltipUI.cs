@@ -55,6 +55,7 @@ public class ItemTooltipUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         if (isEquipped)
         {
             _unequipButton.gameObject.SetActive(true);
+            _deleteButton.gameObject.SetActive(false);
         }
         else if (item.type == ItemType.Consumable)
         {
