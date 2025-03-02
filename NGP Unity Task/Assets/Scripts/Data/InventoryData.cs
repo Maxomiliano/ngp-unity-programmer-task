@@ -6,7 +6,6 @@ using UnityEngine;
 public class InventoryData
 {
     public List<string> itemsIDs = new List<string>();
-    //public Dictionary<ItemType, string> equippedItems = new Dictionary<ItemType, string>();
     public List<EquippedItemData> equippedItems = new List<EquippedItemData>();
 }
 
