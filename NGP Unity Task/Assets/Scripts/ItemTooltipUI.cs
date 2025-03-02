@@ -13,7 +13,8 @@ public class ItemTooltipUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     [SerializeField] private TextMeshProUGUI _itemResistanceText;
     [SerializeField] private Button _equipButton;
     [SerializeField] private Button _unequipButton;
-    //[SerializeField] private Button _deleteButton;
+    [SerializeField] private Button _deleteButton;
+    [SerializeField] private Button _useButton;
     [SerializeField] private CanvasGroup _canvasGroup;
     private bool _isCursorOverTooltip = false;
 
@@ -23,8 +24,10 @@ public class ItemTooltipUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     private void Start()
     {
-        _equipButton.onClick.AddListener(()=>Inventory.Instance.EquipItem(_currentItem));
+        _equipButton.onClick.AddListener(() => Inventory.Instance.EquipItem(_currentItem));
         _unequipButton.onClick.AddListener(() => Inventory.Instance.UnequipItem(_currentItem));
+        _deleteButton.onClick.AddListener(() => Inventory.Instance.RemoveItem(_currentItem));
+        _useButton.onClick.AddListener(() => Inventory.Instance.ConsumeItem(_currentItem));
     }
 
     private void Awake()
@@ -42,6 +45,25 @@ public class ItemTooltipUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         _itemDamageText.text = item.damage.ToString();
         _itemResistanceText.text = item.resistance.ToString();
         transform.position = position;
+
+        _equipButton.gameObject.SetActive(false);
+        _unequipButton.gameObject.SetActive(false);
+        _useButton.gameObject.SetActive(false);
+        _deleteButton.gameObject.SetActive(true);
+
+        bool isEquipped = Inventory.Instance.EquippedSlots.ContainsValue(item);
+        if (isEquipped)
+        {
+            _unequipButton.gameObject.SetActive(true);
+        }
+        else if (item.type == ItemType.Consumable)
+        {
+            _useButton.gameObject.SetActive(true);
+        }
+        else
+        {
+            _equipButton.gameObject.SetActive(true);
+        }
         _canvasGroup.alpha = 1;
         _canvasGroup.blocksRaycasts = true;
     }
@@ -60,7 +82,7 @@ public class ItemTooltipUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void OnPointerExit(PointerEventData eventData)
     {
-       _isCursorOverTooltip = false;
+        _isCursorOverTooltip = false;
         HideTooltip();
     }
 }

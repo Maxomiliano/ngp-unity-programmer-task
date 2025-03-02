@@ -93,7 +93,6 @@ public class Inventory : MonoBehaviour
             RemoveItem(item);
         }
         IsItemEquipped = false;
-        Debug.Log("OnInventoryUpdated INVOCADO desde EquipItem");
         OnInventoryUpdated?.Invoke();
     }
 
@@ -108,7 +107,16 @@ public class Inventory : MonoBehaviour
             }
         }
         IsItemEquipped = false;
-        Debug.Log("OnInventoryUpdated INVOCADO desde UnequipItem");
         OnInventoryUpdated?.Invoke();
+    }
+
+    public void ConsumeItem(ItemDataSO item)
+    {
+        if (item.type == ItemType.Consumable)
+        {
+            //Action
+            RemoveItem(item);
+            OnInventoryUpdated?.Invoke();
+        }
     }
 }
